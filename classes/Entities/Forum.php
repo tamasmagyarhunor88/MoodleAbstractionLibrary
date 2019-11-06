@@ -23,10 +23,10 @@ class Forum extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function posts()
+    public function discussions()
     {
-        return $this->hasManyThrough(ForumPost::class, ForumDiscussion::class, 'forum', 'id', 'id', 'discussion');
+        return $this->hasMany(ForumDiscussion::class, 'forum', 'id');
     }
 }

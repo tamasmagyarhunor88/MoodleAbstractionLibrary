@@ -15,6 +15,8 @@ class ForumPost extends BaseModel
     protected $table = 'forum_posts';
 
     /**
+     * Function name changed from 'discussion()' to avoid conflict with field name
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function discussion()
@@ -28,5 +30,13 @@ class ForumPost extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class,'userid', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     */
+    public function forum()
+    {
+        return $this->hasOneThrough(Forum::class, ForumDiscussion::class,  'id', 'id', 'forum', 'discussion');
     }
 }
